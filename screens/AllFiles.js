@@ -56,8 +56,8 @@ export default function AllFiles({route}){
                     //await RNFS.copyFile(item.uri, destPath);
                     //console.log(await RNFS.stat(destPath));
                     //await RNFS.moveFile(item.uri,"//media/internal/images/media/1").then(()=>{
-                    //Linking.openURL('content://media/internal/images/media/1');
                   //})
+                  Linking.openURL('content://media/internal/images/media/');
                   }}>
                     <Image source={{uri:item.uri}} style={{height:120,width:"100%"}} />
                 </TouchableOpacity>

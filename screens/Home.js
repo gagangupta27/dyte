@@ -57,9 +57,6 @@ export default function Home(){
               buttonNegative: "Cancel",
             }}
           />
-          {/*(isCapturing || isValidatingImageCropping) && (
-            <ActivityIndicator style={styles.loading} animating />
-          )*/}
           {isCropping ?
           <TouchableOpacity onPress={()=>{setIsCropping(false); ref.restart();}} activeOpacity={0.6} style={{position:"absolute",bottom:"7%",left:"10%",paddingVertical:5,paddingHorizontal:15}}>
             <Icon size={30} name="times" type="font-awesome-5" color="white"/>

@@ -39,7 +39,7 @@ export default function FileStack({route}){
     },[])
 
     useEffect(()=>{
-        //const client = RNFileStack.init("AkQR8RXHRChcDK7xwQhLwz");
+        //const client = RNFileStack.init("key....");
         //client.picker().open();
         
         let base64String = "";
@@ -64,18 +64,15 @@ export default function FileStack({route}){
         RNFetchBlob.config({
           fileCache: true
           })
-  .fetch(images[0].uri)
-  .then(resp => {
-    // the image path you can use it directly with Image component
-    imagePath = resp.path();
-    return resp.readFile("base64");
-  })
-  .then(base64Data => {
-    // here's base64 encoded image
-    console.log(base64Data);
-    // remove the file from storage
-    return fs.unlink(imagePath);
-  });
+        .fetch(images[0].uri)
+        .then(resp => {
+        imagePath = resp.path();
+          return resp.readFile("base64");
+        })
+        .then(base64Data => {
+          console.log(base64Data);
+          return fs.unlink(imagePath);
+        });
 
           /*
             let document = "";
@@ -89,14 +86,14 @@ export default function FileStack({route}){
                 console.log('Error: ', error);
             };
     
-        fetch('https://www.filestackapi.com/api/file/store/S3?key=AkQR8RXHRChcDK7xwQhLwz', {
+        fetch('https://www.filestackapi.com/api/file/store/S3?key=', {
           method: 'POST',
           headers: {
             Accept: 'image/png',
             'Content-Type': "image/png"
           },
         body: JSON.stringify({
-        key:"AkQR8RXHRChcDK7xwQhLwz",
+        key:"",
         filename:"gagan",
         mimetype:"image/jpeg",
         path:""
@@ -126,8 +123,8 @@ export default function FileStack({route}){
                     //await RNFS.copyFile(item.uri, destPath);
                     //console.log(await RNFS.stat(destPath));
                     //await RNFS.moveFile(item.uri,"//media/internal/images/media/1").then(()=>{
-                    //Linking.openURL('content://media/internal/images/media/1');
                   //})
+                  Linking.openURL('content://media/internal/images/media/');
                   }}>
                     <Image source={{uri:item.uri}} style={{height:120,width:"100%"}} />
                 </TouchableOpacity>
