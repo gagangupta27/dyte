@@ -192,6 +192,9 @@ dependencies {
       implementation project(':react-native-fs')
 implementation project(':react-native-camera')
   compile project(':@react-native-community_cameraroll')
+//compile project(':react-native-filestack')
+//implementation 'com.filestack:filestack-android:5.3.0'
+
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

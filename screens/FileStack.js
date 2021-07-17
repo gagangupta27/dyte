@@ -17,12 +17,14 @@ import { Icon } from "react-native-elements";
 import CameraRoll from "@react-native-community/cameraroll";
 import { useNavigation } from '@react-navigation/native';
 var RNFS = require('react-native-fs');
+//import RNFileStack from 'react-native-filestack';
 
-export default function AllFiles({route}){
+export default function FileStack({route}){
 
     const navigation = useNavigation();
     const [images,setImages] = useState(null)
     const [res,setRes] = useState([])
+    const [image64,setImage64] = useState(null);
 
     useEffect(()=>{
       CameraRoll.getPhotos({first:100,groupTypes:"Album",groupName:"DyteScan"}).then((data)=>{
@@ -35,6 +37,74 @@ export default function AllFiles({route}){
         setImages(temp)
       })
     },[])
+
+    useEffect(()=>{
+        //const client = RNFileStack.init("AkQR8RXHRChcDK7xwQhLwz");
+        //client.picker().open();
+        
+        let base64String = "";
+        if(images){
+          /*
+          async function func(){
+          const response = await fetch(images[0].uri);
+          const blob = await response.blob();
+          console.log(blob)
+          }
+          func();
+          */
+          RNFS.readFile(images[0].uri, 'base64')
+          .then(res =>{
+            setImage64(res)
+            //console.log(res);
+          });
+
+          /*
+        const fs = RNFetchBlob.fs;
+        let imagePath = null;
+        RNFetchBlob.config({
+          fileCache: true
+          })
+  .fetch(images[0].uri)
+  .then(resp => {
+    // the image path you can use it directly with Image component
+    imagePath = resp.path();
+    return resp.readFile("base64");
+  })
+  .then(base64Data => {
+    // here's base64 encoded image
+    console.log(base64Data);
+    // remove the file from storage
+    return fs.unlink(imagePath);
+  });
+
+          /*
+            let document = "";
+            let reader = new FileReader();
+            reader.readAsDataURL(images[0].uri);
+            reader.onload = function () {
+                document = reader.result;
+                console.log(document)
+            };
+            reader.onerror = function (error) {
+                console.log('Error: ', error);
+            };
+    
+        fetch('https://www.filestackapi.com/api/file/store/S3?key=AkQR8RXHRChcDK7xwQhLwz', {
+          method: 'POST',
+          headers: {
+            Accept: 'image/png',
+            'Content-Type': "image/png"
+          },
+        body: JSON.stringify({
+        key:"AkQR8RXHRChcDK7xwQhLwz",
+        filename:"gagan",
+        mimetype:"image/jpeg",
+        path:""
+        })
+      });
+      */
+    }
+    },[images])
 
 
     return (
@@ -65,15 +135,9 @@ export default function AllFiles({route}){
             numColumns={3}
             keyExtractor={(item, index) => index.toString()}
           />
-          <View style={{position:"absolute",flexDirection:"row",bottom:"5%",right:"5%",padding:10,paddingHorizontal:15,borderWidth:3,borderRadius:100,borderColor:"white"}}>
-          <TouchableOpacity onPress={()=>navigation.navigate("Home")} activeOpacity={0.6} style={{marginRight:15}}> 
-            <Icon size={25} name="camera" type="font-awesome-5" color="white"/>
+          <TouchableOpacity onPress={()=>navigation.navigate("Home")} activeOpacity={0.6} style={{position:"absolute",bottom:"5%",right:"5%",padding:10,borderWidth:3,borderRadius:100,borderColor:"white"}}>
+            <Icon size={30} name="camera" type="font-awesome-5" color="white"/>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>navigation.navigate("FileStack")} activeOpacity={0.6}>
-            <Icon size={25} name="cloud" type="font-awesome-5" color="white"/>
-          </TouchableOpacity>
-          </View>
-
         </View>
       );
 }

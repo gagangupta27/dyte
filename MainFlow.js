@@ -7,7 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
 import SaveImage from "./screens/SaveImage";
 import AllFiles from "./screens/AllFiles";
-
+import FileStack from "./screens/FileStack";
 const Stack = createStackNavigator();
 
 const MainNavigator = () => {
@@ -27,6 +27,11 @@ const MainNavigator = () => {
         <Stack.Screen
           name="AllFiles"
           component={AllFiles}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="FileStack"
+          component={FileStack}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
