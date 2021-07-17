@@ -18,6 +18,7 @@
     "react-native": "0.64.2",
     "react-native-camera": "^3.44.3",
     "react-native-document-scanner": "https://github.com/ubidreams/react-native-document-scanner",
+    "react-native-eject": "^0.1.2",
     "react-native-elements": "^3.4.2",
     "react-native-fs": "^2.18.0",
     "react-native-gesture-handler": "^1.10.3",
